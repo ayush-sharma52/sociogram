@@ -10,7 +10,7 @@ const PostsWidget = ({userId=null}) => {
 
     const getPosts=async()=>{
         try{
-        const response=await fetch("http://localhost:3001/posts",{
+        const response=await fetch("https://sociogram-api.onrender.com/posts",{
             method:"GET",
             headers:{
                 'Authorization':`Bearer ${token}`
@@ -30,7 +30,7 @@ const PostsWidget = ({userId=null}) => {
     
     const getUserPosts=async()=>{
         try{
-            const response=await fetch(`http://localhost:3001/posts/${userId}`,{
+            const response=await fetch(`https://sociogram-api.onrender.com/posts/${userId}`,{
                 method:"GET",
                 headers:{
                     'Authorization':`Bearer ${token}`,

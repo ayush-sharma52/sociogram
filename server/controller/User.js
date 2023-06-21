@@ -20,13 +20,21 @@ export const updateFreinds = async(req,res)=>{
         const friends = await Promise.all(
           user.freinds.map((id) => User.findById(id))
         );
+        const friends2 = await Promise.all(
+          freind.freinds.map((id) => User.findById(id))
+        );
         const formattedFriends = friends.map(
           ({ _id, firstName, lastName, occupation, location, picturePath }) => {
             return { _id, firstName, lastName, occupation, location, picturePath };
           }
         );
+        const formattedFriends2 = friends2.map(
+          ({ _id, firstName, lastName, occupation, location, picturePath }) => {
+            return { _id, firstName, lastName, occupation, location, picturePath };
+          }
+        );
     
-        res.status(200).json(formattedFriends);
+        res.status(200).json({formattedFriends,formattedFriends2});
       } catch (err) {
         res.status(404).json({ message: err.message });
       }

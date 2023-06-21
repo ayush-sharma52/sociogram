@@ -40,7 +40,7 @@ const NavBar = () => {
             cursor:"pointer",
           }
         }}>
-        Sociopedia
+        Sociogram
         </Typography>
 
         {isNonMobileScreens && (

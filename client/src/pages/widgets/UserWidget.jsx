@@ -5,41 +5,20 @@ import UserImage from 'components/UserImage';
 import { Box, Divider, Typography, useTheme } from '@mui/material';
 import { EditOutlined, LocationOnOutlined,
      ManageAccountsOutlined, WorkOutlineOutlined } 
-     from '@mui/icons-material';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+     from '@mui/icons-material'; 
 
-// make the userWidget of the user whose id is provided in props not only of the user who is currently loggedin
+const UserWidget = ({user}) => {
+  
 
-const UserWidget = ({userId,picturePath}) => {
-    const [user,setUser]=useState(null);
      const navigate=useNavigate();
     const {palette}=useTheme();
-    const token=useSelector(state=>state.token);
     const dark=palette.neutral.dark;
     const main=palette.neutral.main;
     const medium=palette.neutral.medium;
-
-    const getUser=async()=>{
-        const response=await fetch(`http://localhost:3001/users/${userId}`,{
-            method:"GET",
-            headers:{
-                'Authorization':`Bearer ${token}`,
-            }
-        });
-
-        const data=await response.json();
-        setUser(data);
-    }
-    
-    useEffect(()=>{
-        getUser();
-    },[])
-    
-    if(!user)
-    return null;
-
+ 
     const{
+      _id:id,
+      picturePath,
         firstName,
         lastName,
         occupation,
@@ -56,7 +35,7 @@ const UserWidget = ({userId,picturePath}) => {
     <FlexBetween
       gap="0.5rem"
       pb="1.1rem"
-      onClick={() => navigate(`/profile/${userId}`)}
+      onClick={() => navigate(`/profile/${id}`)}
     >
       <FlexBetween gap="1rem">
         <UserImage image={picturePath} />

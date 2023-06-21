@@ -19,7 +19,7 @@ const Advert = () => {
         <Typography color={medium}>Create Ad</Typography>
         </FlexBetween>
 
-        <img src="http://localhost:3001/assets/info4.jpeg"
+        <img src="https://sociogram-api.onrender.com/assets/info4.jpeg"
         alt="ad"
         width="100%"
         height="auto"

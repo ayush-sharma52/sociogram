@@ -3,13 +3,13 @@ import UserImage from './UserImage'
 import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import { PersonAddOutlined, PersonRemoveOutlined } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFreinds } from 'state'
+import { setCurrentFreinds, setFreinds } from 'state'
 import { useNavigate } from 'react-router-dom'
 
 const Friend = ({freindId,freindImage,name,subtitle,}) => {
     const dispatch=useDispatch();
     const navigate=useNavigate()
-    const {freinds,_id}=useSelector(state=>state.user);
+    const {freinds,_id,}=useSelector(state=>state.user);
     const token = useSelector(state=>state.token);
   
     const {palette}=useTheme();
@@ -23,7 +23,7 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
     const patchFreind= async() => {
         try{
                 const response = await fetch(
-                  `http://localhost:3001/users/${_id}/${freindId}`,
+                  `https://sociogram-api.onrender.com/users/${_id}/${freindId}`,
                   {
                     method: "PATCH",
                     headers: {
@@ -32,11 +32,25 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
                     },
                   }
                 );
+                
+                // edge case scenario:-
+                // we are on some user's profile page and all his posts are there on the feed if that particular user is not in the
+                // loggedInUser's freinds list then when we click on the addFreind button this func() executes which is sending the 
+                // particular user's id to the backend where backend will update the freindList of both loggedIn user and the current user
+                // but will return only the formattedList of logged in user and also we are dispatching the new FreindsList of the loggedinUser
+                // only so any component using the loggedUser's freind list from redux state will rerender & reflect changes but here in this
+                // profile page the freindsList component is using the currentFreinds state from redux which is not updated and will hence not
+                // reflect changes so either we update the currentFreinds list and dispatch it or do something to re render the profilepage
+                // which will automatically update current list by sending request again 
+
                 const data = await response.json();
-                dispatch(setFreinds({ freinds: data }));
+                dispatch(setFreinds({ freinds: data.formattedFriends }));
+                dispatch(setCurrentFreinds({freinds:data.formattedFriends2}));
+                
               }
     
         catch(err){
+          console.log(err);
             alert(err.message);
         }
 
@@ -72,7 +86,11 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
     </Box>
     </FlexBetween>
 
-    <IconButton 
+{/* to handle the case when we are at someone's profile page and the logged in user is his/her freind then we dont show add/remove icon in that
+case */}
+    
+    {freindId!==_id &&
+ <IconButton 
     onClick={()=>patchFreind()}
     sx={{
         backgroundColor:primaryLight,
@@ -84,6 +102,8 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
         :<PersonAddOutlined sx={{color:primaryDark}}/>
     }
     </IconButton>
+    }
+
 </FlexBetween>
 
   )

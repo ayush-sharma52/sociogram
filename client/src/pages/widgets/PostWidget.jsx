@@ -37,7 +37,7 @@ const PostWidget = (  {
   const patchLike=async()=>{
     try{
       
-    const response = await fetch(`http://localhost:3001/posts/${postId}/like`,{
+    const response = await fetch(`https://sociogram-api.onrender.com/posts/${postId}/like`,{
         method:"PATCH",
         headers:{
             Authorization:`Bearer ${token}`,
@@ -45,7 +45,7 @@ const PostWidget = (  {
     });
     
     const post=await response.json(); //this route returns same post by updating its likes map so we update the redux state's posts field too
-    console.log(post);
+    
     dispatch(setPost({post}));
     
   }catch(err){
@@ -73,7 +73,7 @@ const PostWidget = (  {
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`http://localhost:3001/assets/${picturePath}`}
+          src={`https://sociogram-api.onrender.com/assets/${picturePath}`}
         />
       )}
 

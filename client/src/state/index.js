@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   token: null,
   posts: [],
+  currentFreinds:[], //freinds of the current user whose profile is openend
 };
 
 export const authSlice = createSlice({
@@ -39,9 +40,14 @@ export const authSlice = createSlice({
       });
       state.posts = updatedPosts;
     },
+    setCurrentFreinds: (state, action) => {
+      
+        state.currentFreinds = action.payload.freinds;
+      
+    },
   },
 });
 
-export const { setMode, setLogin, setLogout, setFreinds , setPosts, setPost } =
+export const { setMode, setLogin, setLogout, setFreinds , setPosts, setPost, setCurrentFreinds } =
   authSlice.actions;
 export default authSlice.reducer;
