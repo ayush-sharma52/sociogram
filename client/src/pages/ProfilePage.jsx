@@ -48,7 +48,7 @@ const ProfilePage = () => {
 
   if (!user) return null;
 
-  user.freinds=userId!==_id?currentFreinds:freinds;
+  user.freinds= ((userId!==_id) ? currentFreinds:freinds);
   return (
     <Box>
       <Navbar />
