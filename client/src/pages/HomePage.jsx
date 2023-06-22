@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, useMediaQuery } from '@mui/material'
 import NavBar from './NavBar'
 import UserWidget from './widgets/UserWidget';
