@@ -40,7 +40,7 @@ const MyPostWidget = ({picturePath}) => {
         formData.append("picturePath",image.name);}
 
         try{
-        const response = await fetch("https://sociogram-api.onrender.com/post",{ //this end point returns all the posts as response
+        const response = await fetch("https://sociogram-0h3b.onrender.com/post",{ //this end point returns all the posts as response
             method:"POST",
             headers:{
                 'Authorization':`Bearer ${token}`,

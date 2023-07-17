@@ -37,7 +37,7 @@ const PostWidget = (  {
   const patchLike=async()=>{
     try{
       
-    const response = await fetch(`https://sociogram-api.onrender.com/posts/${postId}/like`,{
+    const response = await fetch(`https://sociogram-0h3b.onrender.com/posts/${postId}/like`,{
         method:"PATCH",
         headers:{
             Authorization:`Bearer ${token}`,
@@ -73,7 +73,7 @@ const PostWidget = (  {
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`https://sociogram-api.onrender.com/assets/${picturePath}`}
+          src={`https://sociogram-0h3b.onrender.com/assets/${picturePath}`}
         />
       )}
 

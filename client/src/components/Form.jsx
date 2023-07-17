@@ -65,7 +65,7 @@ const Form = () => {
             // values={firstName,lastName,...} values[value] ex:- values.firstName
             formData.append("picturePath",values.picture.name);
             try{
-            const savedUserResponse = await fetch("https://sociogram-api.onrender.com/auth/register",{
+            const savedUserResponse = await fetch("https://sociogram-0h3b.onrender.com/auth/register",{
                 method:"POST",
                 body:formData,
             });
@@ -84,7 +84,7 @@ const Form = () => {
         else{
 
             try{
-            const loggedInResponse=await fetch("https://sociogram-api.onrender.com/auth/login",{
+            const loggedInResponse=await fetch("https://sociogram-0h3b.onrender.com/auth/login",{
                 method:"POST",
                 body:JSON.stringify(values),
                 headers: {

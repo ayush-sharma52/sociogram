@@ -21,7 +21,7 @@ const ProfilePage = () => {
   const dispatch=useDispatch();
 
   const getUser = async () => {
-    const response = await fetch(`https://sociogram-api.onrender.com/users/${userId}`, {
+    const response = await fetch(`https://sociogram-0h3b.onrender.com/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -29,7 +29,7 @@ const ProfilePage = () => {
     setUser(data);
   };
   const getFreinds=async()=>{
-    const response=await fetch(`https://sociogram-api.onrender.com/users/${userId}/freinds`,{
+    const response=await fetch(`https://sociogram-0h3b.onrender.com/users/${userId}/freinds`,{
         method:"GET",
         headers:{
             Authorization:`Bearer ${token}`,

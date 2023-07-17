@@ -11,7 +11,7 @@ const PostsWidget = ({userId=null}) => {
 
     const getPosts=async()=>{
         try{
-        const response=await fetch("https://sociogram-api.onrender.com/posts",{
+        const response=await fetch("https://sociogram-0h3b.onrender.com/posts",{
             method:"GET",
             headers:{
                 'Authorization':`Bearer ${token}`
@@ -31,7 +31,7 @@ const PostsWidget = ({userId=null}) => {
     
     const getUserPosts=async()=>{
         try{
-            const response=await fetch(`https://sociogram-api.onrender.com/posts/${userId}`,{
+            const response=await fetch(`https://sociogram-0h3b.onrender.com/posts/${userId}`,{
                 method:"GET",
                 headers:{
                     'Authorization':`Bearer ${token}`,

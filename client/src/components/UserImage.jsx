@@ -9,7 +9,7 @@ const UserImage = ({image,size="60px"}) => {
     height={size}
     style={{objectFit:"cover",borderRadius:"50%"}}
     alt="user"
-    src={`https://sociogram-api.onrender.com/assets/${image}`}
+    src={`https://sociogram-0h3b.onrender.com/assets/${image}`}
     
     />
 

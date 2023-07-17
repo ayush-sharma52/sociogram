@@ -20,7 +20,7 @@ const HomePage = () => {
 
   const getFriends=async()=>{
     try{
-    const response=await fetch(`https://sociogram-api.onrender.com/users/${_id}/freinds`,{
+    const response=await fetch(`https://sociogram-0h3b.onrender.com/users/${_id}/freinds`,{
         method:"GET",
         headers:{
             Authorization:`Bearer ${token}`,
