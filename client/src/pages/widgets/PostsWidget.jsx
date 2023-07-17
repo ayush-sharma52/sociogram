@@ -17,9 +17,9 @@ const PostsWidget = ({userId=null}) => {
                 'Authorization':`Bearer ${token}`
             }
         });
-
-        const data=await response.json();
         
+         const data=await response.json();
+         
         dispatch(setPosts({posts:data}));
         
     }
@@ -43,6 +43,7 @@ const PostsWidget = ({userId=null}) => {
             
         }
         catch(err){
+          
             alert(err.message);
         }
         

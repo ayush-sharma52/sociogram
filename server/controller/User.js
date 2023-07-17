@@ -4,16 +4,19 @@ import User from '../models/User.js';
 export const updateFreinds = async(req,res)=>{
     try {
         const { id, freindId } = req.params;
-        const user = await User.findById(id);
         const freind = await User.findById(freindId);
-  
+        const user = await User.findById(id);
+        console.log(user,"freind :"+freind);
+
         if (user.freinds.includes(freindId)) {
           user.freinds = user.freinds.filter((id) => id !== freindId);
-          freind.freinds = freind.freinds.filter((id) => id !== id);
+         if(freind) freind.freinds = freind.freinds.filter((id) => id !== id);
         } else {
           user.freinds.push(freindId);
-          freind.freinds.push(id);
+          if(freind) freind.freinds.push(id);
         }
+
+        console.log("saved");
         await user.save();
         await freind.save();
     
@@ -33,7 +36,7 @@ export const updateFreinds = async(req,res)=>{
             return { _id, firstName, lastName, occupation, location, picturePath };
           }
         );
-    
+          console.log(formattedFriends.length,formattedFriends2.length);
         res.status(200).json({formattedFriends,formattedFriends2});
       } catch (err) {
         res.status(404).json({ message: err.message });
@@ -73,11 +76,13 @@ const freinds = await Promise.all(
 
 // we only included those properties in the returning freinds 
 // which we want(no email passwords etc)
+
 const formattedFreinds=freinds.map(
     ({_id,firstName,lastName,occupation,location,picturePath})=>{
     return {_id,firstName,lastName,location,occupation,picturePath};
     }
-);
+    );
+    
 res.status(200).json(formattedFreinds);
 
     }

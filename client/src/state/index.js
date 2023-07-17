@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   token: null,
   posts: [],
+  freinds:[],
   currentFreinds:[], //freinds of the current user whose profile is openend
 };
 

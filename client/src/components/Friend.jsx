@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 const Friend = ({freindId,freindImage,name,subtitle,}) => {
     const dispatch=useDispatch();
     const navigate=useNavigate()
-    const {freinds,_id,}=useSelector(state=>state.user);
+    const {freinds,_id:id}=useSelector(state=>state.user);
     const token = useSelector(state=>state.token);
   
     const {palette}=useTheme();
@@ -17,13 +17,12 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
     const primaryDark=palette.primary.dark;
     const main = palette.neutral.main;
     const medium=palette.neutral.medium;
-    
     const isFreind = freinds.find((friend) => friend._id === freindId);
 
     const patchFreind= async() => {
         try{
                 const response = await fetch(
-                  `https://sociogram-0h3b.onrender.com/users/${_id}/${freindId}`,
+                  `https://sociogram-0h3b.onrender.com/users/${id}/${freindId}`,
                   {
                     method: "PATCH",
                     headers: {
@@ -44,6 +43,7 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
                 // which will automatically update current list by sending request again 
 
                 const data = await response.json();
+                console.log(data);
                 dispatch(setFreinds({ freinds: data.formattedFriends }));
                 dispatch(setCurrentFreinds({freinds:data.formattedFriends2}));
                 
@@ -89,7 +89,7 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
 {/* to handle the case when we are at someone's profile page and the logged in user is his/her freind then we dont show add/remove icon in that
 case */}
     
-    {freindId!==_id &&
+    {freindId!==id &&
  <IconButton 
     onClick={()=>patchFreind()}
     sx={{
