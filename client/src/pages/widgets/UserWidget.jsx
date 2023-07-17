@@ -23,7 +23,7 @@ const UserWidget = ({user}) => {
         lastName,
         occupation,
         location,
-        freinds,
+        friends,
         viewedProfile,
         impressions,
         } = user;
@@ -53,7 +53,7 @@ const UserWidget = ({user}) => {
           >
             {firstName} {lastName}
           </Typography>
-          <Typography color={medium}>{freinds.length} friends</Typography>
+          <Typography color={medium}>{friends.length} friends</Typography>
         </Box>
       </FlexBetween>
       <ManageAccountsOutlined />

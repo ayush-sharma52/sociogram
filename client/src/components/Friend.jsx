@@ -3,13 +3,13 @@ import UserImage from './UserImage'
 import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import { PersonAddOutlined, PersonRemoveOutlined } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentFreinds, setFreinds } from 'state'
+import { setCurrentfriends, setfriends } from 'state'
 import { useNavigate } from 'react-router-dom'
 
 const Friend = ({freindId,freindImage,name,subtitle,}) => {
     const dispatch=useDispatch();
     const navigate=useNavigate()
-    const {freinds,_id:id}=useSelector(state=>state.user);
+    const {friends,_id:id}=useSelector(state=>state.user);
     const token = useSelector(state=>state.token);
   
     const {palette}=useTheme();
@@ -17,7 +17,7 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
     const primaryDark=palette.primary.dark;
     const main = palette.neutral.main;
     const medium=palette.neutral.medium;
-    const isFreind = freinds.find((friend) => friend._id === freindId);
+    const isFreind = friends.find((friend) => friend._id === freindId);
 
     const patchFreind= async() => {
         try{
@@ -34,18 +34,18 @@ const Friend = ({freindId,freindImage,name,subtitle,}) => {
                 
                 // edge case scenario:-
                 // we are on some user's profile page and all his posts are there on the feed if that particular user is not in the
-                // loggedInUser's freinds list then when we click on the addFreind button this func() executes which is sending the 
+                // loggedInUser's friends list then when we click on the addFreind button this func() executes which is sending the 
                 // particular user's id to the backend where backend will update the freindList of both loggedIn user and the current user
-                // but will return only the formattedList of logged in user and also we are dispatching the new FreindsList of the loggedinUser
+                // but will return only the formattedList of logged in user and also we are dispatching the new friendsList of the loggedinUser
                 // only so any component using the loggedUser's freind list from redux state will rerender & reflect changes but here in this
-                // profile page the freindsList component is using the currentFreinds state from redux which is not updated and will hence not
-                // reflect changes so either we update the currentFreinds list and dispatch it or do something to re render the profilepage
+                // profile page the friendsList component is using the currentfriends state from redux which is not updated and will hence not
+                // reflect changes so either we update the currentfriends list and dispatch it or do something to re render the profilepage
                 // which will automatically update current list by sending request again 
 
                 const data = await response.json();
                 console.log(data);
-                dispatch(setFreinds({ freinds: data.formattedFriends }));
-                dispatch(setCurrentFreinds({freinds:data.formattedFriends2}));
+                dispatch(setfriends({ friends: data.formattedFriends }));
+                dispatch(setCurrentfriends({friends:data.formattedFriends2}));
                 
               }
     

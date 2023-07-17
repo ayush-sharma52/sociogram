@@ -8,7 +8,7 @@ import PostsWidget from './widgets/PostsWidget';
 import Advert from './widgets/Advert';
 import FriendsList from './widgets/FriendsList';
 import { useEffect } from 'react';
-import { setFreinds } from 'state';
+import { setfriends } from 'state';
 
 const HomePage = () => {
   const user=useSelector(state=>state.user);
@@ -20,15 +20,15 @@ const HomePage = () => {
 
   const getFriends=async()=>{
     try{
-    const response=await fetch(`https://sociogram-0h3b.onrender.com/users/${_id}/freinds`,{
+    const response=await fetch(`https://sociogram-0h3b.onrender.com/users/${_id}/friends`,{
         method:"GET",
         headers:{
             Authorization:`Bearer ${token}`,
         }
     });
      
-     const freinds=await response.json();
-    dispatch(setFreinds({freinds}));
+     const friends=await response.json();
+    dispatch(setfriends({friends}));
     
   }
     catch(err){
@@ -39,8 +39,8 @@ const HomePage = () => {
   }
 
   useEffect(()=>{
-    getFriends(); //we called this function when the component  rendered so that we update the user.freinds in redux state to their formatted 
-    // value before passing them onto freindsList widget coz it works on formattedFreinds
+    getFriends(); //we called this function when the component  rendered so that we update the user.friends in redux state to their formatted 
+    // value before passing them onto friendsList widget coz it works on formattedfriends
   },[])
 
   return (
@@ -67,7 +67,7 @@ const HomePage = () => {
           <Box flexBasis="26%" >
             <Advert/>
             <Box m="2rem 0"/>
-            <FriendsList freinds={user.freinds}/>
+            <FriendsList friends={user.friends}/>
             </Box>}
           
         </Box>

@@ -1,19 +1,19 @@
 //this folder contains the controller functions to control the actions for various userRoutes
 import User from '../models/User.js';
 
-export const updateFreinds = async(req,res)=>{
+export const updatefriends = async(req,res)=>{
     try {
         const { id, freindId } = req.params;
         const freind = await User.findById(freindId);
         const user = await User.findById(id);
         console.log(user,"freind :"+freind);
 
-        if (user.freinds.includes(freindId)) {
-          user.freinds = user.freinds.filter((id) => id !== freindId);
-         if(freind) freind.freinds = freind.freinds.filter((id) => id !== id);
+        if (user.friends.includes(freindId)) {
+          user.friends = user.friends.filter((id) => id !== freindId);
+         if(freind) freind.friends = freind.friends.filter((id) => id !== id);
         } else {
-          user.freinds.push(freindId);
-          if(freind) freind.freinds.push(id);
+          user.friends.push(freindId);
+          if(freind) freind.friends.push(id);
         }
 
         console.log("saved");
@@ -21,10 +21,10 @@ export const updateFreinds = async(req,res)=>{
         await freind.save();
     
         const friends = await Promise.all(
-          user.freinds.map((id) => User.findById(id))
+          user.friends.map((id) => User.findById(id))
         );
         const friends2 = await Promise.all(
-          freind.freinds.map((id) => User.findById(id))
+          freind.friends.map((id) => User.findById(id))
         );
         const formattedFriends = friends.map(
           ({ _id, firstName, lastName, occupation, location, picturePath }) => {
@@ -52,13 +52,13 @@ export const getUser = async(req,res)=>{
     res.status(404).json({message:err.message});
     }
 };
-export const getFreinds = async(req,res)=>{
+export const getfriends = async(req,res)=>{
     try{
         const id=req.params.id;
         const user=await User.findById(id);
         
    
-        // const freinds = user.freinds.map(async(id) => {
+        // const friends = user.friends.map(async(id) => {
         //     const freind= await User.findById(id);
         //     return freind;
         // });
@@ -70,20 +70,20 @@ export const getFreinds = async(req,res)=>{
 // and return the resolved values. Here's an updated version of the code:
 
 
-const freinds = await Promise.all(
-    user.freinds.map(id =>User.findById(id))
+const friends = await Promise.all(
+    user.friends.map(id =>User.findById(id))
 );
 
-// we only included those properties in the returning freinds 
+// we only included those properties in the returning friends 
 // which we want(no email passwords etc)
 
-const formattedFreinds=freinds.map(
+const formattedfriends=friends.map(
     ({_id,firstName,lastName,occupation,location,picturePath})=>{
     return {_id,firstName,lastName,location,occupation,picturePath};
     }
     );
     
-res.status(200).json(formattedFreinds);
+res.status(200).json(formattedfriends);
 
     }
 catch(err){

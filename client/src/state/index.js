@@ -5,8 +5,8 @@ const initialState = {
   user: null,
   token: null,
   posts: [],
-  freinds:[],
-  currentFreinds:[], //freinds of the current user whose profile is openend
+  friends:[],
+  currentfriends:[], //friends of the current user whose profile is openend
 };
 
 export const authSlice = createSlice({
@@ -24,9 +24,9 @@ export const authSlice = createSlice({
       state.user = null;
       state.token = null;
     },
-    setFreinds: (state, action) => {
+    setfriends: (state, action) => {
       if (state.user) {
-        state.user.freinds = action.payload.freinds;
+        state.user.friends = action.payload.friends;
       } else {
         console.error("user friends non-existent :(");
       }
@@ -41,14 +41,14 @@ export const authSlice = createSlice({
       });
       state.posts = updatedPosts;
     },
-    setCurrentFreinds: (state, action) => {
+    setCurrentfriends: (state, action) => {
       
-        state.currentFreinds = action.payload.freinds;
+        state.currentfriends = action.payload.friends;
       
     },
   },
 });
 
-export const { setMode, setLogin, setLogout, setFreinds , setPosts, setPost, setCurrentFreinds } =
+export const { setMode, setLogin, setLogout, setfriends , setPosts, setPost, setCurrentfriends } =
   authSlice.actions;
 export default authSlice.reducer;

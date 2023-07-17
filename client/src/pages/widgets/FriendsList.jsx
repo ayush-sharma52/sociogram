@@ -2,7 +2,7 @@ import { Box, Typography, useTheme } from "@mui/material"
 import Friend from "components/Friend"
 import WidgetWrapper from "components/WidgetWrapper"
 
-const FriendsList = ({freinds}) => {
+const FriendsList = ({friends}) => {
   const {palette}=useTheme();
   
     return (
@@ -15,7 +15,7 @@ const FriendsList = ({freinds}) => {
         sx={{mb:"1.5rem"}}
         >Friends List</Typography>
         <Box gap="2rem" display="flex" flexDirection="column">
-            {freinds.map(freind=>
+            {friends.map(freind=>
             <Friend 
             key={freind._id}
             freindImage={freind.picturePath}

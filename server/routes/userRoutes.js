@@ -1,15 +1,15 @@
 import express from 'express';
 import { getUser,
-getFreinds,
-updateFreinds } from '../controller/User.js';
+getfriends,
+updatefriends } from '../controller/User.js';
 const router = express.Router();
 import {auth} from '../middleware/auth.js';
 
 /* READ */
 router.get('/:id',auth,getUser);
-router.get('/:id/freinds',auth,getFreinds);
+router.get('/:id/friends',auth,getfriends);
 
 /* UPDATE */
-router.patch('/:id/:freindId',auth,updateFreinds)
+router.patch('/:id/:freindId',auth,updatefriends)
 
 export default router; 
